@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/bookmarkFragment"
+        android:name="com.example.newsexpress.fragment.BookmarkFragment"
+        android:label="fragment_bookmark"
+        tools:layout="@layout/fragment_bookmark" />
+    <fragment
+        android:id="@+id/businessNewsFragment"
+        android:name="com.example.newsexpress.fragment.BusinessNewsFragment"
+        android:label="fragment_business_news"
+        tools:layout="@layout/fragment_business_news" />
+    <fragment
+        android:id="@+id/healthNewsFragment"
+        android:name="com.example.newsexpress.fragment.HealthNewsFragment"
+        android:label="fragment_health_news"
+        tools:layout="@layout/fragment_health_news" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.newsexpress.fragment.HomeFragment"
+        android:label="fragment_home2"
+        tools:layout="@layout/fragment_home2" />
+    <fragment
+        android:id="@+id/navigationMenuFragment"
+        android:name="com.example.newsexpress.fragment.NavigationMenuFragment"
+        android:label="fragment_navigation_menu"
+        tools:layout="@layout/fragment_navigation_menu" />
+    <fragment
+        android:id="@+id/savedNewsFragment"
+        android:name="com.example.newsexpress.fragment.SavedNewsFragment"
+        android:label="fragment_saved_news"
+        tools:layout="@layout/fragment_saved_news" />
+    <fragment
+        android:id="@+id/entertainmentFragment"
+        android:name="com.example.newsexpress.fragment.EntertainmentFragment"
+        android:label="fragment_entertainment"
+        tools:layout="@layout/fragment_entertainment" />
+    <fragment
+        android:id="@+id/scienceFragment"
+        android:name="com.example.newsexpress.fragment.ScienceFragment"
+        android:label="fragment_science"
+        tools:layout="@layout/fragment_science" />
+    <fragment
+        android:id="@+id/sportNewsFragment"
+        android:name="com.example.newsexpress.fragment.SportNewsFragment"
+        android:label="fragment_sport_news"
+        tools:layout="@layout/fragment_sport_news" />
+    <fragment
+        android:id="@+id/technicalNewsFragment"
+        android:name="com.example.newsexpress.fragment.TechnicalNewsFragment"
+        android:label="fragment_technical_news"
+        tools:layout="@layout/fragment_technical_news" />
+</navigation>

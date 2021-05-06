@@ -1,5 +1,6 @@
 package com.example.newsexpress.api
 
+import com.example.newsexpress.api.constant.Companion.BASE_URL
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -8,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
 
-    private const val BASE_URL = "http://api.mediastack.com/v1/"
+    //private const val BASE_URL = "http://api.mediastack.com/v1/"
 
     val getClient: RetrofitInterface
         get() {

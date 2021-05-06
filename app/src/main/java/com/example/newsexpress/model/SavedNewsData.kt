@@ -6,8 +6,8 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 
-@Entity(tableName = "NewsData")
-data class NewsData(
+@Entity(tableName = "SavedNewsData")
+data class SavedNewsData(
     @PrimaryKey(autoGenerate = true)
     var id:Int = 0,
     @SerializedName("author")

@@ -1,28 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <item
+        android:id="@+id/search"
+        android:checkable="true"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="Search"
+        android:visible="true"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="ifRoom" />
+<group android:checkableBehavior="single">
     <item
         android:id="@+id/general"
         android:icon="@android:drawable/ic_menu_today"
         android:title="General" />
     <item
-        android:icon="@android:drawable/radiobutton_on_background"
-        android:title="Entertainment"
-        android:id="@+id/entertainment"/>
+        android:id="@+id/entertainment"
+        android:icon="@drawable/ic_baseline_local_movies_24"
+        android:title="Entertainment" />
     <item
         android:id="@+id/healthNews"
+        android:icon="@drawable/ic_baseline_health_and_safety_24"
         android:title="Health News" />
     <item
         android:id="@+id/scienceNews"
+        android:icon="@drawable/ic_baseline_science_24"
         android:title="Science News" />
     <item
         android:id="@+id/technoNews"
+        android:icon="@drawable/ic_baseline_architecture_24"
         android:title="Techno News" />
     <item
         android:id="@+id/sportsNews"
+        android:icon="@drawable/ic_baseline_sports_baseball_24"
         android:title="Sports News" />
     <item
         android:id="@+id/businessToday"
+        android:icon="@drawable/ic_baseline_business_24"
         android:title="Business Today" />
+    <item
+        android:id="@+id/bookmark"
+        android:icon="@drawable/ic_baseline_bookmarks_24"
+        android:title="Business Today" />
+</group>
+
 </menu>
