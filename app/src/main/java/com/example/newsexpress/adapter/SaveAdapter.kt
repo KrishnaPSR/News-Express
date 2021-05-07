@@ -36,7 +36,9 @@ class SaveAdapter  (val context: Context, val data: ArrayList<SavedNewsData>):
                 holder.title.text = article.title
                 holder.date.text = article.pulished_at.substring(0,10)
                 if (article.image != null){
-                    Glide.with(this).load(article.image).into(holder.image)
+                    Glide.with(this)
+                        .load(article.image)
+                        .into(holder.image)
                 }
                 if (article.author != null){
                     holder.source.text = article.author

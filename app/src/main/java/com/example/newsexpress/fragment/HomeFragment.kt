@@ -1,9 +1,11 @@
 package com.example.newsexpress.fragment
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -40,10 +42,11 @@ class HomeFragment : Fragment() {
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         if(mainActivity.isOnline(activity as AppCompatActivity)){
-            setUi()
+            setUpUI()
         }
         else{
             internetCheckText.visibility = View.VISIBLE
@@ -55,7 +58,7 @@ class HomeFragment : Fragment() {
     /**
      *To set up the UI of HomePage Fragment
      */
-    fun setUi(){
+    private fun setUpUI(){
         progressBar.visibility = View.VISIBLE
         viewmodel = ViewModelProvider(this).get(NewsExpressViewModel(activity!!.application)::class.java)
         viewmodel.getNewsData(null,category)
