@@ -48,7 +48,6 @@ class SaveAdapter  (val context: Context, val data: ArrayList<SavedNewsData>):
                     val bundle = Bundle().apply {
                         putSerializable("article",article)
                     }
-                   // findNavController().navigate(R.id.action_savedItemFragment_to_newsDetailFragment,bundle)
                 }
             }
 

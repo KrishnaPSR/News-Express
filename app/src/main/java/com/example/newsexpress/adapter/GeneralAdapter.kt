@@ -7,19 +7,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.newsexpress.NewsDetialFragment
 import com.example.newsexpress.R
 import com.example.newsexpress.model.SavedNewsData
 
 class GeneralAdapter (val context: Context , val data: ArrayList<SavedNewsData>):
     RecyclerView.Adapter<GeneralAdapter.ViewHolder>() {
+    private lateinit var  frag: Fragment
     class ViewHolder(view: View):RecyclerView.ViewHolder(view) {
         val image = view.findViewById<ImageView>(R.id.rvNewsImage)
         val title = view.findViewById<TextView>(R.id.rvNewsTitle)
         val source = view.findViewById<TextView>(R.id.rvNewsSource)
         val date = view.findViewById<TextView>(R.id.rvNewsDate)
+        val card = view.findViewById<CardView>(R.id.rvCardView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -47,11 +53,27 @@ class GeneralAdapter (val context: Context , val data: ArrayList<SavedNewsData>)
             else{
                 holder.source.text = "No Source Available"
             }
-            setOnClickListener {
+            holder.card.setOnClickListener {
+                val fragment =(context as AppCompatActivity).supportFragmentManager.beginTransaction()
+//                val fragment = view.context.supportFragmentManager.beginTransaction()
+
+
                 val bundle = Bundle().apply {
-                    putSerializable("article",article)
+                    putInt("id", article.id)
+                    putString("author", article.author)
+                    putString("title", article.title)
+                    putString("url", article.url)
+                    putString("image", article.image)
+                    putString("description", article.description)
+                    putString("pulished_at", article.pulished_at)
+                    putSerializable("article",article )
+
                 }
-               // findNavController().navigate(R.id.action_homePageFragment_to_newsDetailFragment,bundle)
+                frag = NewsDetialFragment()
+                frag.arguments = bundle
+                fragment.replace(R.id.fragment_container, frag).commit()
+
+
             }
         }
     }

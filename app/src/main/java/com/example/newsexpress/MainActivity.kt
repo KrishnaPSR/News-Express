@@ -1,15 +1,16 @@
 package com.example.newsexpress
 
-import android.app.SearchManager
-import android.content.ComponentName
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.os.Bundle
-import android.view.Gravity
-import android.view.Menu
+import android.util.Log
 import android.view.MenuItem
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.widget.SearchView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.example.newsexpress.fragment.*
@@ -18,6 +19,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar_main.*
 
 class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelectedListener {
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -30,9 +32,12 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 
         nav_menu.setNavigationItemSelectedListener(this)
         setToolbarTitle("General")
-        changeFragment(HomeFragment())
+        changeFragment(HomeFragment(),"")
 
-
+        if (!isOnline(this)) {
+            Toast.makeText(this,"No Internet", Toast.LENGTH_LONG).show()
+            return
+        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -40,47 +45,91 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         when (item.itemId) {
             R.id.general -> {
                 setToolbarTitle("Home News")
-                changeFragment(HomeFragment())
+                changeFragment("")
+
             }
             R.id.entertainment -> {
                 setToolbarTitle("Entertainment News")
-                changeFragment(EntertainmentFragment())
+
+                changeFragment("entertainment")
             }
-            R.id.healthNews ->{
+            R.id.healthNews -> {
                 setToolbarTitle("Health News")
-                changeFragment(HealthNewsFragment())
+                changeFragment("health")
             }
-            R.id.scienceNews ->{
+            R.id.scienceNews -> {
                 setToolbarTitle("Science News")
-                changeFragment(ScienceFragment())
+                changeFragment("science")
             }
-            R.id.technoNews ->{
+            R.id.technoNews -> {
                 setToolbarTitle("Technical News")
-                changeFragment(TechnicalNewsFragment())
+                changeFragment("technology")
             }
-            R.id.sportsNews ->{
+            R.id.sportsNews -> {
                 setToolbarTitle("Sports News")
-                changeFragment(SportNewsFragment())
+                changeFragment("sports")
             }
-            R.id.businessToday ->{
+            R.id.businessToday -> {
                 setToolbarTitle("Business Today")
-                changeFragment(BusinessNewsFragment())
+                changeFragment("business")
             }
-            R.id.bookmark ->{
+            R.id.bookmark -> {
                 setToolbarTitle("Saved News")
-                changeFragment(BookmarkFragment())
+                changeFragment("saved")
             }
         }
         return true
     }
 
+
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    fun isOnline(context: Context): Boolean {
+        val connectivityManager =
+                context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val capabilities =
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+                } else {
+                    TODO("VERSION.SDK_INT < M")
+                }
+        if (capabilities != null) {
+            when {
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> {
+                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_CELLULAR")
+                    return true
+                }
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> {
+                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_WIFI")
+                    return true
+                }
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> {
+                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_ETHERNET")
+                    return true
+                }
+            }
+        }
+        return false
+
+    }
     private fun setToolbarTitle(title: String) {
         supportActionBar?.title = title
     }
 
-    private fun changeFragment(frag: Fragment) {
+    private fun changeFragment(category: String) {
         val fragment = supportFragmentManager.beginTransaction()
-        fragment.replace(R.id.fragment_container,frag).commit()
+        val bundle = Bundle()
+        val frag = HomeFragment()
+        bundle.putString("category", category)
+        frag.arguments = bundle
+        fragment.replace(R.id.fragment_container, frag).commit()
+
+    }
+    private fun changeFragment(frag: Fragment,category: String) {
+        val fragment = supportFragmentManager.beginTransaction()
+        val bundle = Bundle()
+        bundle.putString("category", category)
+        frag.arguments = bundle
+        fragment.replace(R.id.fragment_container, frag).commit()
 
     }
 
@@ -108,3 +157,4 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 //
 //    }
 }
+
