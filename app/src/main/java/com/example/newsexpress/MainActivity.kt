@@ -6,17 +6,21 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
+import com.example.newsexpress.adapter.SearchAdapter
 import com.example.newsexpress.fragment.*
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar_main.*
+import java.util.Locale.filter
 
 class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelectedListener {
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -132,6 +136,22 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         fragment.replace(R.id.fragment_container, frag).commit()
 
     }
+//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+//        menuInflater.inflate(R.menu.search, menu)
+//        val search = menu.findItem(R.id.app_bar_search)
+//        val searchView = search.actionView as SearchView
+//        searchView.queryHint = "Search"
+//        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+//            override fun onQueryTextSubmit(query: String?): Boolean {
+//                return false
+//            }
+//            override fun onQueryTextChange(newText: String?): Boolean {
+//                //SearchAdapter.filter.filter(newText)
+//                return false
+//            }
+//        })
+//        return true
+//    }
 
 //    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 //        val inflater = menuInflater

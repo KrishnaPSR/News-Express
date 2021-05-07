@@ -27,7 +27,6 @@ class SearchAdapter (val context: Context, val data: ArrayList<SavedNewsData>):
         return SearchAdapter.ViewHolder(view)
 
     }
-
     override fun getItemCount(): Int {
        return data.size
     }
@@ -50,11 +49,9 @@ class SearchAdapter (val context: Context, val data: ArrayList<SavedNewsData>):
                 val bundle = Bundle().apply {
                     putSerializable("article",article)
                 }
-                //findNavController().navigate(R.id.action_searchItemFragment_to_newsDetailFragment,bundle)
+
             }
         }
 
     }
-
-
 }

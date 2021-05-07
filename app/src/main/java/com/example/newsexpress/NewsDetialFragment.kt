@@ -35,19 +35,21 @@ class NewsDetialFragment : Fragment() {
         val article = this.requireArguments().getSerializable("article")
         detailtextTitle.text = articleId.toString()
         detailTextDetail.text = description.toString()
-        Glide.with(this).load(image).into(detailImageview)
-
+        Glide.with(this)
+            .load(image)
+            .into(detailImageview)
         viewmodel = ViewModelProvider(this).get(NewsExpressViewModel::class.java)
+
         if( articleId != 0){
             addtofav.setOnClickListener {
                 viewmodel.deleteNews(article as SavedNewsData)
-                Snackbar.make(view,"Article deleted successfully", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(view,"Article Removed From Bookmark", Snackbar.LENGTH_SHORT).show()
             }
         }
         else {
             addtofav.setOnClickListener {
                 viewmodel.insertNews(article as SavedNewsData)
-                Snackbar.make(view, "Article saved successfully", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(view, "Article added to Bookmark", Snackbar.LENGTH_SHORT).show()
             }
         }
     }
