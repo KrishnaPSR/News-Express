@@ -21,7 +21,6 @@ class NewsExpressRepository {
 
     fun getNews(keyword: String?, category: String) {
         val news = ApiClient.getClient.getNewsData(apiKey, category, "in", "en", 100, keyword)
-
         news.enqueue(object : Callback<ResponseDataModel> {
             override fun onResponse(
                 call: Call<ResponseDataModel>,
@@ -35,31 +34,17 @@ class NewsExpressRepository {
             }
         })
     }
-
-    /**
-     * Function to get data from database
-     * requires context
-     */
     fun getNewsDataFromDatabase(context: Context): LiveData<List<SavedNewsData>> {
         val database = AppDatabaseBuilder().getInstance(context)
         return database.SavedNewsDao().getAllNews()
     }
 
-    /**
-     * Function to delete data from database
-     * requires context and data of NewsData type
-     */
     fun deleteNewsArticle(context: Context, data: SavedNewsData) {
         val database = AppDatabaseBuilder().getInstance(context)
         Executors.newSingleThreadExecutor().execute {
             database.SavedNewsDao().deleteNews(data)
         }
     }
-
-    /**
-     * Function to insert data in database
-     * requires context and data of NewsData type
-     */
     fun insertData(context: Context, data: SavedNewsData) {
         val database = AppDatabaseBuilder().getInstance(context)
         Executors.newSingleThreadExecutor().execute {

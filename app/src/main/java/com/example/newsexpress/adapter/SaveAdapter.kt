@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.navigation.findNavController
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.newsexpress.R
@@ -25,16 +25,14 @@ class SaveAdapter  (val context: Context, val data: ArrayList<SavedNewsData>):
         val view = LayoutInflater.from(parent.context).inflate(R.layout.rv_itemview,parent,false)
         return SaveAdapter.ViewHolder(view)
     }
-
     override fun getItemCount(): Int {
      return data.size
     }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val article = data[position]
             holder.itemView.apply {
                 holder.title.text = article.title
-                holder.date.text = article.pulished_at.substring(0,10)
+                holder.date.text = article.published_at.substring(0,10)
                 if (article.image != null){
                     Glide.with(this)
                         .load(article.image)
@@ -47,12 +45,18 @@ class SaveAdapter  (val context: Context, val data: ArrayList<SavedNewsData>):
                     holder.source.text = "No Source Available"
                 }
                 setOnClickListener {
+                    val fragment =(context as AppCompatActivity).supportFragmentManager.beginTransaction()
                     val bundle = Bundle().apply {
-                        putSerializable("article",article)
+                        putInt("id", article.id)
+                        putString("author", article.author)
+                        putString("title", article.title)
+                        putString("url", article.url)
+                        putString("image", article.image)
+                        putString("description", article.description)
+                        putString("published_at", article.published_at)
+                        putSerializable("article",article )
                     }
                 }
             }
-
-        }
-
     }
+}

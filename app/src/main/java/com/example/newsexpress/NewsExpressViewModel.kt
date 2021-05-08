@@ -15,18 +15,14 @@ class NewsExpressViewModel(application: Application):AndroidViewModel(applicatio
     fun getNewsData(keyword:String?,category:String){
         repository.getNews(keyword,category)
     }
-
-
+    fun getNewsFromDatabase(): LiveData<List<SavedNewsData>> {
+        return repository.getNewsDataFromDatabase(context)
+    }
     fun insertNews(data:SavedNewsData){
         repository.insertData(context,data)
     }
-
-
     fun deleteNews(data: SavedNewsData){
         repository.deleteNewsArticle(context,data)
     }
 
-    fun getNewsFromDatabase(): LiveData<List<SavedNewsData>> {
-        return repository.getNewsDataFromDatabase(context)
-    }
 }
