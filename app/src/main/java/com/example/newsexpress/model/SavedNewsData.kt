@@ -21,5 +21,5 @@ data class SavedNewsData(
     @SerializedName("description")
     val description:String?,
     @SerializedName("published_at")
-    val pulished_at:String
+    val published_at:String
 ):Serializable

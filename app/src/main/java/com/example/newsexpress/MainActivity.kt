@@ -6,21 +6,17 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
 import android.view.MenuItem
-import android.widget.SearchView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
-import com.example.newsexpress.adapter.SearchAdapter
 import com.example.newsexpress.fragment.*
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar_main.*
-import java.util.Locale.filter
 
 class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelectedListener {
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -37,6 +33,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         nav_menu.setNavigationItemSelectedListener(this)
         setToolbarTitle("General")
         changeFragment(HomeFragment(),"")
+        //BookmarkFragment(BookmarkFragment(),"")
 
         if (!isOnline(this)) {
             Toast.makeText(this,"No Internet", Toast.LENGTH_LONG).show()
@@ -79,7 +76,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
             }
             R.id.bookmark -> {
                 setToolbarTitle("Saved News")
-                changeFragment("saved")
+                changeFragment(BookmarkFragment(),"saved")
             }
         }
         return true
@@ -125,7 +122,9 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         val frag = HomeFragment()
         bundle.putString("category", category)
         frag.arguments = bundle
-        fragment.replace(R.id.fragment_container, frag).commit()
+        fragment.replace(R.id.fragment_container, frag)
+                .addToBackStack(null)
+                .commit()
 
     }
     private fun changeFragment(frag: Fragment,category: String) {
@@ -133,7 +132,20 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         val bundle = Bundle()
         bundle.putString("category", category)
         frag.arguments = bundle
-        fragment.replace(R.id.fragment_container, frag).commit()
+        fragment.replace(R.id.fragment_container, frag)
+                .addToBackStack(null)
+                .commit()
+
+    }
+    private fun BookmarkFragment(frag: Fragment,category: String) {
+        val fragment = supportFragmentManager.beginTransaction()
+        val bundle = Bundle()
+        val frag= BookmarkFragment()
+        bundle.putString("category", category)
+        frag.arguments = bundle
+        fragment.replace(R.id.fragment_container, frag)
+                .addToBackStack(null)
+                .commit()
 
     }
 //    override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -26,7 +26,6 @@ object ApiClient {
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
-
             return retrofit.create(RetrofitInterface::class.java)
 
         }

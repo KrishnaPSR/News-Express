@@ -31,11 +31,6 @@
         android:label="fragment_navigation_menu"
         tools:layout="@layout/fragment_navigation_menu" />
     <fragment
-        android:id="@+id/savedNewsFragment"
-        android:name="com.example.newsexpress.fragment.SavedNewsFragment"
-        android:label="fragment_saved_news"
-        tools:layout="@layout/fragment_saved_news" />
-    <fragment
         android:id="@+id/entertainmentFragment"
         android:name="com.example.newsexpress.fragment.EntertainmentFragment"
         android:label="fragment_entertainment"
@@ -55,4 +50,5 @@
         android:name="com.example.newsexpress.fragment.TechnicalNewsFragment"
         android:label="fragment_technical_news"
         tools:layout="@layout/fragment_technical_news" />
+
 </navigation>
