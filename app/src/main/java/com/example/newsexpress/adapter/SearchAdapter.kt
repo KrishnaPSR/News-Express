@@ -33,7 +33,7 @@ class SearchAdapter (val context: Context, val data: ArrayList<SavedNewsData>):
         val article = data[position]
         holder.itemView.apply {
             holder.title.text = article.title
-            holder.date.text = article.published_at.substring(0,10)
+            holder.date.text = article.published_at
             if (article.image != null){
                 Glide.with(this).load(article.image).into(holder.image)
             }

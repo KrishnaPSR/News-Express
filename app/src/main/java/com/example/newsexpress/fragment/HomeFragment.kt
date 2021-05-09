@@ -21,10 +21,11 @@ import kotlinx.android.synthetic.main.fragment_home2.*
 class HomeFragment : Fragment() {
 
     lateinit var viewmodel: NewsExpressViewModel
+    //Optional category to get news by Category
     lateinit var category:String
     var keyword : String = ""
 
-    //instance to get the connectivity method
+    //Making instance to get the connectivity method
     val mainActivity = MainActivity()
 
     override fun onCreateView(
@@ -76,7 +77,7 @@ class HomeFragment : Fragment() {
     }
 
     /**
-     *function to set up UI of Home Fragment
+     *To set up the UI of HomePage Fragment
      */
     private fun setUpUI(){
         progressBar.visibility = View.VISIBLE

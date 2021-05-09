@@ -8,16 +8,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.newsexpress.NewsDetialFragment
 import com.example.newsexpress.R
 import com.example.newsexpress.model.SavedNewsData
 
 class SaveAdapter  (val context: Context, val data: ArrayList<SavedNewsData>):
     RecyclerView.Adapter<SaveAdapter.ViewHolder>() {
-    private lateinit var  frag: Fragment
     class ViewHolder(view: View):RecyclerView.ViewHolder(view) {
         val image = view.findViewById<ImageView>(R.id.rvNewsImage)
         val title = view.findViewById<TextView>(R.id.rvNewsTitle)
@@ -35,7 +32,7 @@ class SaveAdapter  (val context: Context, val data: ArrayList<SavedNewsData>):
             val article = data[position]
             holder.itemView.apply {
                 holder.title.text = article.title
-                holder.date.text = article.published_at
+                holder.date.text = article.published_at.substring(0,10)
                 if (article.image != null){
                     Glide.with(this)
                         .load(article.image)
@@ -59,11 +56,6 @@ class SaveAdapter  (val context: Context, val data: ArrayList<SavedNewsData>):
                         putString("published_at", article.published_at)
                         putSerializable("article",article )
                     }
-                    frag = NewsDetialFragment()
-                    frag.arguments = bundle
-                    fragment.replace(R.id.fragment_container, frag)
-                        //.addToBackStack(null)
-                        .commit()
                 }
             }
     }
